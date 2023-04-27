@@ -112,7 +112,21 @@ public class StudentManager {
     }
 
     public static void display() {
-        System.out.println(Arrays.toString(studentList.stream().toArray()));
+        Scanner scanner = new Scanner(System.in);
+        int index = 0;
+        while (index < StudentManager.getStudentList().size()) {
+            List<Student> holder = new ArrayList<>();
+            for (int i = 0; i < 5; i++) {
+                if (StudentManager.getStudentList().size() - index == 0) {
+                    break;
+                }
+                holder.add(StudentManager.studentList.get(index));
+                index++;
+            }
+            System.out.println(Arrays.toString(holder.stream().toArray()));
+            String userInput = scanner.nextLine();
+        }
+
         UserInterface.displayMenu();
     }
 }
