@@ -31,17 +31,21 @@ public class StudentManager {
     public static void update() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Input student id for editing:");
-        int inputID;
+        String inputID;
         boolean idMatchInputId;
         do {
-            inputID = Integer.parseInt(scanner.nextLine());
-            idMatchInputId = studentList.stream().map(student -> student.getId()).toList().contains(inputID);
+
+            inputID = scanner.nextLine();
+            if (inputID.length() == 0 ){
+                UserInterface.displayMenu();
+            }
+            idMatchInputId = studentList.stream().map(student -> student.getId()).toList().contains(Integer.parseInt(inputID));
             if (!idMatchInputId){
                 System.out.println("Id not found \nInput id again");
             }
         }while (!idMatchInputId);
 
-        int finalId = inputID;
+        int finalId = Integer.parseInt(inputID);
         Student studentMatchInputId = studentList.stream().filter(student -> student.getId() == finalId).findFirst().get();
 
         System.out.println("Input student name:");
